@@ -60,6 +60,8 @@ public class TutorialController {
         }
     }
 
+
+
     //Metodo para consultar cursos por precio
     @GetMapping("/price/{price}")
     public List<Tutorial> getTitleByPrice(@PathVariable("price") double price) {
@@ -68,6 +70,19 @@ public class TutorialController {
         return tutorialData;
 
 
+    }
+    @GetMapping("/tutorials/published")
+    public ResponseEntity<List<Tutorial>> findByPublished() {
+        try {
+            List<Tutorial> tutorials = tutorialRepository.findByPublished(true);
+
+            if (tutorials.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(tutorials, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        }
     }
 
 
@@ -125,8 +140,10 @@ public class TutorialController {
     @DeleteMapping("/tutorialsDe")
     public String deleteByName(@RequestParam("title") String title) {
 
+        //Para borrar un curso que tiene espacios en blanco en el nombre
+        //se debe colocar un guion '-' en vez de espacio para que el metodo funcione
         try {
-            List<Tutorial> tutorialData = tutorialRepository.findByTitleContaining(title);
+            List<Tutorial> tutorialData = tutorialRepository.findByTitleContaining(title.replace("-", " "));
             if (!tutorialData.isEmpty()) {
                 tutorialRepository.deleteById(tutorialData.get(0).getId());
             }
@@ -138,18 +155,6 @@ public class TutorialController {
 
     }
 
-    @GetMapping("/tutorials/published")
-    public ResponseEntity<List<Tutorial>> findByPublished() {
-        try {
-            List<Tutorial> tutorials = tutorialRepository.findByPublished(true);
 
-            if (tutorials.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-            return new ResponseEntity<>(tutorials, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
-        }
-    }
 
 }
