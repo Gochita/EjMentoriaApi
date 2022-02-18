@@ -9,5 +9,5 @@
 ![Image text](https://github.com/Gochita/EjMentoriaApi/blob/main/Titulo.PNG)
 
 
-#Imagen api actualizar por titulo
+#Imagen api actualizar por titulo, a los parametros que no se le mandan los pone por default segun su tipo (Excepto el published que se manda true por defecto)
 ![Image text](https://github.com/Gochita/EjMentoriaApi/blob/main/update.PNG)
