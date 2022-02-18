@@ -2,5 +2,12 @@
 "# API-rest-FULL-Tutorials" 
 #Imagen api eliminar por titulo
 ![Image text](https://github.com/Gochita/EjMentoriaApi/blob/main/imagen.png)
+
+
+
 #Imagen api obtener por precio
 ![Image text](https://github.com/Gochita/EjMentoriaApi/blob/main/Titulo.PNG)
+
+
+#Imagen api actualizar por titulo
+![Image text](https://github.com/Gochita/EjMentoriaApi/blob/main/update.PNG)
