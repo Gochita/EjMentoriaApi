@@ -112,6 +112,23 @@ public class TutorialController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+//Metodo para actualizar un curso por su titulo
+    @PutMapping("/tutorials/title/{title}")
+    public ResponseEntity<Tutorial> updateTutorialByTitle(@PathVariable("title")String title,@RequestBody Tutorial tutorialdata){
+        try{
+            List<Tutorial> tutoriales= tutorialRepository.findByTitleContaining(title.replace("-", " "));
+            Tutorial tutorialData= tutoriales.iterator().next();
+            tutorialData.setTitle(tutorialdata.getTitle());
+            tutorialData.setDescription(tutorialdata.getDescription());
+            tutorialData.setPublished(true);
+            tutorialData.setPrice(tutorialdata.getPrice());
+            return new ResponseEntity<>(tutorialRepository.save(tutorialData),HttpStatus.OK);
+
+        }catch(Exception ex){
+            return new ResponseEntity<>((HttpStatus.NOT_FOUND));
+        }
+    }
+
 
     //HttpStatus
     @DeleteMapping("/tutorials/{id}")
